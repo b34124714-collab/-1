@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>年齡與憂鬱、焦慮、壓力的關係</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav"><div class="nav-in"><a class="brand" href="index.html">年齡與 DASS 研究</a><a class="tab" href="index.html" aria-current="page">首頁</a><a class="tab" href="results.html">研究結果</a><a class="tab" href="ask.html">問答</a><a class="tab" href="about.html">關於研究</a></div></header>
+<main class="wrap">
+<h1>年齡與憂鬱、焦慮、壓力的關係</h1>
+<p class="lead">本研究分析網路自願填答者的 DASS-42 量表資料，比較不同年齡層在憂鬱、焦慮與壓力三個分量表的平均分數與嚴重度分布。</p>
+
+<div class="stats">
+  <div class="card"><div class="num" id="nTotal">4,175</div><div class="stat-l">有效樣本數（原始 5,000 筆，經資料清洗後保留）</div></div>
+  <div class="card"><div class="num" id="pYoung">約 86%</div><div class="stat-l">樣本為 10–29 歲，集中在年輕族群</div></div>
+  <div class="card"><div class="num">42 題</div><div class="stat-l">DASS-42 量表，憂鬱、焦慮、壓力各 14 題</div></div>
+</div>
+
+<div class="entries">
+  <a class="card entry" href="results.html"><h2>研究結果</h2><p>各年齡層的分量表平均數與嚴重度分布，可切換圖表與分量表。</p></a>
+  <a class="card entry" href="ask.html"><h2>問答</h2><p>即將推出。</p></a>
+  <a class="card entry" href="about.html"><h2>關於研究</h2><p>資料來源、研究方法與樣本限制。</p></a>
+</div>
+</main>
+<footer class="foot"><div class="foot-in"><span>組別：第＿＿組</span><span>組員：＿＿＿、＿＿＿、＿＿＿</span></div></footer>
+<script>
+(function(){
+const CSV_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vT6LeKrz9YO9XuK41vaG462V6ovtyGpNbUiATgdojtKV_tOBiN5wijh4pdABGEmc0iMbs7CR6aa4ns9/pub?gid=1744398470&single=true&output=csv";
+fetch(CSV_URL,{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.text()}).then(function(t){
+  const rows=t.replace(/^\uFEFF/,"").split(/\r?\n/).map(function(l){return l.split(",").map(function(c){return c.trim()})});
+  const h=rows.findIndex(function(r){return r[0]==="年齡層"&&r[3]==="人數"});
+  if(h<0)return;
+  let tot=0,young=0;
+  for(let i=h+1;i<rows.length&&rows[i][0]!=="";i++){
+    const n=+rows[i][3];if(isNaN(n))return;
+    tot+=n;if(rows[i][0]==="10–19"||rows[i][0]==="20–29")young+=n;
+  }
+  if(!tot)return;
+  document.getElementById("nTotal").textContent=tot.toLocaleString("en-US");
+  document.getElementById("pYoung").textContent="約 "+Math.round(young/tot*100)+"%";
+}).catch(function(){});
+})();
+</script>
+</body>
+</html>
