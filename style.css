@@ -1,0 +1,68 @@
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1f2933;--mute:#617080;--line:#e3e7ec;--accent:#2f5d8a;
+--dep:#3b6fb6;--anx:#e08a1e;--str:#2f9e75;
+--l0:#8fc9a4;--l1:#f1d56b;--l2:#f0a35a;--l3:#df6b55;--l4:#9c2f3f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:32px 16px 56px}
+h1{font-size:28px;margin:0 0 8px;letter-spacing:.02em}
+.lead{color:var(--mute);margin:0 0 24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:20px}
+.controls{display:flex;flex-wrap:wrap;gap:16px 32px;align-items:center}
+.ctl-label{font-size:13px;color:var(--mute);margin-right:8px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;background:#fff;padding:7px 16px;font:inherit;cursor:pointer;color:var(--ink)}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button.on{background:var(--accent);color:#fff}
+.opt{display:inline-flex;align-items:center;gap:6px;margin-right:14px;cursor:pointer}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.hint{font-size:12px;color:var(--mute)}
+h2{font-size:17px;margin:0 0 4px}
+svg{width:100%;height:auto;display:block}
+svg text{font-family:inherit}
+.tick{fill:var(--mute);font-size:12px}
+.axt{fill:var(--mute);font-size:12px}
+[data-tip]{cursor:pointer}
+#tip{position:fixed;pointer-events:none;background:#1f2933;color:#fff;padding:8px 10px;border-radius:8px;font-size:13px;line-height:1.55;z-index:9;display:none;max-width:240px}
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+thead th{background:#f0f3f7;font-weight:600}
+thead tr.g th{text-align:center}
+tr.tot td{font-weight:600;background:#fafbfc}
+td.na{color:#9aa5b1}
+.notes h2{margin-bottom:8px}
+.notes p,.notes li{color:#3c4a57;margin:6px 0}
+.notes ul{padding-left:20px;margin:6px 0}
+.notes table{max-width:520px;margin:8px 0}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:13px}
+/* ===== 分頁共用：導覽列、頁尾、版面 ===== */
+body{display:flex;flex-direction:column;min-height:100vh}
+main.wrap{flex:1;width:100%}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.nav{background:var(--card);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1000px;margin:0 auto;padding:0 16px;display:flex;flex-wrap:wrap;align-items:flex-end;gap:0 24px}
+.brand{font-weight:600;color:var(--ink);text-decoration:none;padding:14px 0;margin-right:auto}
+.nav a.tab{display:inline-block;padding:14px 2px 11px;color:var(--mute);text-decoration:none;border-bottom:3px solid transparent}
+.nav a.tab:hover{color:var(--ink)}
+.nav a.tab[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.foot{border-top:1px solid var(--line);background:var(--card);color:var(--mute);font-size:13px}
+.foot-in{max-width:1000px;margin:0 auto;padding:16px;display:flex;flex-wrap:wrap;gap:4px 28px}
+/* ===== 首頁 ===== */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:20px}
+.stats .card{margin:0}
+.num{font-size:34px;font-weight:600;line-height:1.2;font-variant-numeric:tabular-nums;color:var(--accent)}
+.stat-l{color:var(--mute);font-size:13px}
+.entries{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+a.entry{display:block;color:inherit;text-decoration:none;margin:0}
+a.entry:hover{border-color:var(--accent)}
+a.entry h2{color:var(--accent)}
+a.entry p{margin:4px 0 0;color:var(--mute);font-size:14px}
+/* ===== 問答、關於 ===== */
+.soon{text-align:center;padding:48px 20px}
+.soon h2{font-size:20px;margin-bottom:8px}
+.soon p{color:var(--mute);margin:0}
+.doc h2{margin-top:4px}
+.doc p,.doc li{color:#3c4a57;margin:6px 0}
+.doc ul{padding-left:20px;margin:6px 0}
