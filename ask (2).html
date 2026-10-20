@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>問答｜年齡與憂鬱、焦慮、壓力的關係</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav"><div class="nav-in"><a class="brand" href="index.html">年齡與 DASS 研究</a><a class="tab" href="index.html">首頁</a><a class="tab" href="results.html">研究結果</a><a class="tab" href="ask.html" aria-current="page">問答</a><a class="tab" href="about.html">關於研究</a></div></header>
+<main class="wrap">
+<h1>問答</h1>
+<div class="card soon">
+  <h2>即將推出</h2>
+  <p>這個頁面還在準備中，敬請期待。</p>
+</div>
+<div class="card">
+  <span class="seg"><button type="button" id="btnTest" class="on">測試連線</button></span>
+  <div id="testOut" class="hint" role="status" aria-live="polite" style="margin-top:12px;white-space:pre-wrap"></div>
+</div>
+<div class="card">
+  <span class="seg"><button type="button" id="btnGemini" class="on">測試 Gemini</button></span>
+  <div id="geminiOut" class="hint" role="status" aria-live="polite" style="margin-top:12px;white-space:pre-wrap"></div>
+</div>
+</main>
+<footer class="foot"><div class="foot-in"><span>組別：第＿＿組</span><span>組員：＿＿＿、＿＿＿、＿＿＿</span></div></footer>
+<script>
+(function(){
+const API_URL="https://data-1.b34124714.workers.dev";
+const btn=document.getElementById("btnTest"),out=document.getElementById("testOut");
+btn.addEventListener("click",async function(){
+  btn.disabled=true;out.textContent="連線中…";
+  try{
+    const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"test"})});
+    const text=await res.text();
+    let data=null;try{data=JSON.parse(text)}catch(e){}
+    if(!res.ok){
+      out.textContent="失敗（HTTP "+res.status+"）："+((data&&data.error)||text||"後端沒有回傳訊息");
+    }else{
+      out.textContent="成功（HTTP "+res.status+"）：\n"+(data?JSON.stringify(data,null,2):text);
+    }
+  }catch(err){
+    out.textContent="連線失敗：無法連到後端，可能是網路問題，或後端不允許這個網站呼叫。（"+err.message+"）";
+  }finally{
+    btn.disabled=false;
+  }
+});
+})();
+</script>
+<script>
+(function(){
+const API_URL="https://data-1.b34124714.workers.dev";
+const QUESTION="請用一句話自我介紹";
+const btn=document.getElementById("btnGemini"),out=document.getElementById("geminiOut");
+btn.addEventListener("click",async function(){
+  btn.disabled=true;out.textContent="等待 Gemini 回覆中…";
+  try{
+    const res=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"ask",question:QUESTION})});
+    const text=await res.text();
+    let data=null;try{data=JSON.parse(text)}catch(e){}
+    if(!res.ok||!data||typeof data.answer!=="string"){
+      out.textContent="失敗（HTTP "+res.status+"）："+((data&&data.error)||text||"後端沒有回傳訊息");
+    }else{
+      out.textContent="問題："+QUESTION+"\n\nGemini 回覆：\n"+data.answer;
+    }
+  }catch(err){
+    out.textContent="連線失敗：無法連到後端，可能是網路問題，或後端不允許這個網站呼叫。（"+err.message+"）";
+  }finally{
+    btn.disabled=false;
+  }
+});
+})();
+</script>
+</body>
+</html>
